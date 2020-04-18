@@ -34,12 +34,15 @@ class Launch():
 #Start command
 def start(update, context):
     welcome_text = '###Welcome to the Launchpad Bot!'
-    context.bot.send_message(chat_id=update.effective_chat.id, text=welcome_text)
+    context.bot.send_message(chat_id=update.effective_chat.id, 
+                            text=welcome_text, 
+                            parse_mode=ParseMode.MARKDOWN_V2)
 
 def getUpcomingLaunches(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 5
     api_json = json.loads(j)['result']
+    print(api_json)
     txts = []
     for i in range(0, n_results):
         l = Launch(
@@ -60,7 +63,6 @@ def getUpcomingLaunches(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=endtext, 
                             parse_mode=ParseMode.MARKDOWN_V2)
-
 
 def main():
     print("Launchpad Bot started!\n")
