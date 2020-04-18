@@ -38,7 +38,7 @@ def start(update, context):
                             text=welcome_text, 
                             parse_mode=ParseMode.MARKDOWN_V2)
 
-def getUpcomingLaunches(update, context):
+def launches(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 5
     api_json = json.loads(j)['result']
@@ -76,7 +76,7 @@ def main():
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
 
-    nextFive_handler = CommandHandler('upcoming', getUpcomingLaunches)
+    nextFive_handler = CommandHandler('launches', launches)
     dispatcher.add_error_handler(nextFive_handler)
 
     # Start polling for commands
