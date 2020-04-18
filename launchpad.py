@@ -9,9 +9,8 @@ import json
 from creds import token as bot_token
 
 class Launch():
-    gmpas_baseurl = "https://www.google.com/maps/search/?api=1&query="
-
     def __init__(self, mission_name, provider, vehicle, padname, padloc, description, launch_date):
+        self.gmpas_baseurl = "https://www.google.com/maps/search/?api=1&query="
         self.mission_name = mission_name
         self.provider = provider
         self.vehicle = vehicle
@@ -24,7 +23,7 @@ class Launch():
         if launch_date is not "None":
             parts = launch_date.split('T')
             day = parts[0].split('-')
-            self.launch_date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:-1] + '(UTC)'
+            self.date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:-1] + '(UTC)'
 
     def createDisplayText(self):
         print(self.date)
