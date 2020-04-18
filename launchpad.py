@@ -86,10 +86,10 @@ def nextLaunch(update, context):
 def info(update, context):
     text = "<b>Launchpad Bot for Telegram by @simocosimo\n" \
             "I really hope you like the bot. It is a work in progress, I want to improve" \
-            " it as much as possible, in style and in informations. Bare in mind that " \ 
+            " it as much as possible, in style and in informations. Bare in mind that " \
             " space launches are usually subjected to change in schedule, so take the dates" \
             " with a grain of salt. \nIf you want to make a little donation to help the " \
-            "project, <a href='https://www.paypal.me/simocosimo'>you can do it!</a> You absolutely don't have to, but they are really " \ 
+            "project, <a href='https://www.paypal.me/simocosimo'>you can do it!</a> You absolutely don't have to, but they are really " \
             "appreciated <3"
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=text, 
