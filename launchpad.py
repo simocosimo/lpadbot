@@ -46,13 +46,13 @@ def launches(update, context):
     txts = []
     for i in range(0, n_results):
         l = Launch(
-            api_json[i]['name'],
-            api_json[i]['provider']['name'],
-            api_json[i]['vehicle']['name'],
-            api_json[i]['pad']['location']['name'],
-            api_json[i]['pad']['location']['statename'] + api_json[i]['pad']['location']['country'],
-            api_json[i]['launch_description'],
-            api_json[i]['win_open']
+            str(api_json[i]['name']),
+            str(api_json[i]['provider']['name']),
+            str(api_json[i]['vehicle']['name']),
+            str(api_json[i]['pad']['location']['name']),
+            str(api_json[i]['pad']['location']['statename']) + str(api_json[i]['pad']['location']['country']),
+            str(api_json[i]['launch_description']),
+            str(api_json[i]['win_open'])
         )
         txts.append(l.getFormattedText())
     
