@@ -75,6 +75,9 @@ def main():
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
 
+    nextFive_handler = CommandHandler('upcoming', getUpcomingLaunches)
+    dispatcher.add_error_handler(nextFive_handler)
+
     # Start polling for commands
     updater.start_polling()
     updater.idle()
