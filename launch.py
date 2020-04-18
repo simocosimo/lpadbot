@@ -10,7 +10,7 @@ class Launch():
         
         self.date = "TBD"
         print("Date parameter: " + launch_date + '\n')
-        if launch_date is not "None":
+        if launch_date != "None":
             parts = launch_date.split('T')
             day = parts[0].split('-')
             print('Parts: ' + str(len(parts)) + '\nDay: ' + str(len(day)))
