@@ -33,7 +33,7 @@ class Launch():
 
 #Start command
 def start(update, context):
-    welcome_text = '**Welcome to the Launchpad Bot!**'
+    welcome_text = '**Welcome to the Launchpad Bot**'
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=welcome_text, 
                             parse_mode=ParseMode.MARKDOWN_V2)
