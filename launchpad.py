@@ -1,5 +1,6 @@
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler
+from telegram import ParseMode
 
 import logging
 import requests
@@ -16,9 +17,9 @@ class Launch():
         self.padloc = padloc
         self.description = description
         self.launch_date = launch_date
-        self.text = createDisplayText()
+        self.text = self.createDisplayText()
 
-    def createDisplayText():
+    def createDisplayText(self):
         text = '**Mission:** ' + self.mission_name + '\n' \
                 '**Provider:** ' + self.provider + '\n' \
                 '**Vehicle:** ' + self.vehicle + '\n' \
@@ -27,13 +28,13 @@ class Launch():
                 '' + self.description
         return text
     
-    def getFormattedText():
+    def getFormattedText(self):
         return self.text
 
 #Start command
 def start(update, context):
     welcome_text = '###Welcome to the Launchpad Bot!'
-    context.bot.send_message(chat_id=chat_id, text=welcome_text)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=welcome_text)
 
 def getUpcomingLaunches(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
@@ -41,7 +42,7 @@ def getUpcomingLaunches(update, context):
     api_json = json.loads(j)['result']
     txts = []
     for i in range(0, n_results):
-        l = new Launch(
+        l = Launch(
             api_json[i]['name'],
             api_json[i]['provider']['name'],
             api_json[i]['vehicle']['name'],
@@ -56,16 +57,15 @@ def getUpcomingLaunches(update, context):
     for i in range(0, len(txts)):
         endtext = endtext + txts[i] + '\n-----------\n'
     
-    context.bot.send_message(chat_id=chat_id, 
+    context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=endtext, 
-                            parse_mode=telegram.ParseMode.MARKDOWN_V2)
+                            parse_mode=ParseMode.MARKDOWN_V2)
 
 
 def main():
     print("Launchpad Bot started!\n")
     updater = Updater(token=bot_token, use_context=True)
     dispatcher = updater.dispatcher
-    chat_id = updater.message.chat_id
 
     # Setup the logging part of the bot
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
