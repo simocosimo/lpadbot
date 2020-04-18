@@ -20,13 +20,12 @@ def launches(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 5
     api_json = json.loads(j.text)['result']
-    padlocation = ""
     txts = []
     for i in range(0, n_results):
+        padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country'])
+        print(str(api_json[i]['pad']['location']['statename']))
         if str(api_json[i]['pad']['location']['statename']) == "None":
             padlocation = str(api_json[i]['pad']['location']['country'])
-        else:
-            padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
         print(padlocation)
 
         l = Launch(
