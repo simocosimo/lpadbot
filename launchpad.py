@@ -27,6 +27,7 @@ class Launch():
             self.launch_date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:-1] + '(UTC)'
 
     def createDisplayText(self):
+        print(self.launch_date)
         gmaps_querykey = self.padname.replace(' ', '+')
         text = '<b>Mission:</b> ' + self.mission_name + '\n' \
                 '<b>Provider:</b> ' + self.provider + '\n' \
