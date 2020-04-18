@@ -20,10 +20,10 @@ class Launch():
         self.text = self.createDisplayText()
         self.date = "TBD"
 
-        if launch_date is not "None":
-            parts = launch_date.split('T')
-            day = parts[0].split('-')
-            self.date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:-1] + '(UTC)'
+        #if launch_date is not "None":
+        #    parts = launch_date.split('T')
+        #    day = parts[0].split('-')
+        #    self.date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:-1] + '(UTC)'
 
     def createDisplayText(self):
         print(self.date)
