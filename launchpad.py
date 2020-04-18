@@ -73,8 +73,8 @@ def nextLaunch(update, context):
     
     providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china"]
     selected = ""
-    for i in providers_list:
-        if i in str(api_json[i]['provider']['name']).lower():
+    for i in range(0, len(providers_list)):
+        if providers_list[i] in str(api_json[i]['provider']['name']).lower():
             selected = i + '.jpg'
             break
 
@@ -84,7 +84,7 @@ def nextLaunch(update, context):
                             parse_mode=ParseMode.HTML)
 
 def info(update, context):
-    text = "<b>Launchpad Bot for Telegram by @simocosimo\n" \
+    text = "<b>Launchpad Bot</b> for Telegram by @simocosimo\n" \
             "I really hope you like the bot. It is a work in progress, I want to improve" \
             " it as much as possible, in style and in informations. Bare in mind that " \
             " space launches are usually subjected to change in schedule, so take the dates" \
