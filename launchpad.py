@@ -23,7 +23,7 @@ def launches(update, context):
     padlocation = ""
     txts = []
     for i in range(0, n_results):
-        if str(api_json[i]['pad']['location']['statename']) is "None":
+        if str(api_json[i]['pad']['location']['statename']) == "None":
             padlocation = str(api_json[i]['pad']['location']['country'])
         else:
             padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
@@ -54,7 +54,7 @@ def nextLaunch(update, context):
     padlocation = ""
     txts = []
     for i in range(0, n_results):
-        if str(api_json[i]['pad']['location']['statename']) is "None":
+        if str(api_json[i]['pad']['location']['statename']) == "None":
             padlocation = str(api_json[i]['pad']['location']['country'])
         else:
             padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
