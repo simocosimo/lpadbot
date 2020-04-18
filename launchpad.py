@@ -41,7 +41,7 @@ def start(update, context):
 def launches(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 5
-    api_json = json.loads(j)['result']
+    api_json = json.loads(j.text)['result']
     print(api_json)
     txts = []
     for i in range(0, n_results):
