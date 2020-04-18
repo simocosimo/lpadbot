@@ -75,7 +75,7 @@ def nextLaunch(update, context):
     selected = ""
     for i in range(0, len(providers_list)):
         if providers_list[i] in str(api_json[i]['provider']['name']).lower():
-            selected = i + '.jpg'
+            selected = providers_list[i] + '.jpg'
             break
 
     context.bot.send_photo(chat_id=update.effective_chat.id, 
@@ -90,7 +90,7 @@ def info(update, context):
             " space launches are usually subjected to change in schedule, so take the dates" \
             " with a grain of salt. \nIf you want to make a little donation to help the " \
             "project, <a href='https://www.paypal.me/simocosimo'>you can do it!</a> You absolutely don't have to, but they are really " \
-            "appreciated <3"
+            "appreciated!"
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=text, 
                             parse_mode=ParseMode.HTML)
