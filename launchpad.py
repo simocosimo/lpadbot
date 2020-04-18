@@ -20,11 +20,11 @@ class Launch():
         self.text = self.createDisplayText()
 
     def createDisplayText(self):
-        text = '**Mission:** ' + self.mission_name + '\n' +
-                '**Provider:** ' + self.provider + '\n' +
-                '**Vehicle:** ' + self.vehicle + '\n' +
-                '**Launching from** ' + self.padname + '(' + self.padloc + ')\n' +
-                '**Date:** ' + self.launch_date + '\n\n' +
+        text = '**Mission:** ' + self.mission_name + '\n' \
+                '**Provider:** ' + self.provider + '\n' \
+                '**Vehicle:** ' + self.vehicle + '\n' \
+                '**Launching from** ' + self.padname + '(' + self.padloc + ')\n' \
+                '**Date:** ' + self.launch_date + '\n\n' \
                 '' + self.description
         return text
     
