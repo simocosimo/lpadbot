@@ -1,7 +1,8 @@
 from telegram.ext import Updater
+from creds import token as bot_token
 import logging
 
-updater = Updater(token='', use_context=True)
+updater = Updater(token=bot_token, use_context=True)
 dispatcher = updater.dispatcher
 
 # Setup the logging part of the bot
