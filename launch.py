@@ -12,7 +12,8 @@ class Launch():
         if launch_date is not "None":
             parts = launch_date.split('T')
             day = parts[0].split('-')
-            self.date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:4] + '(UTC)'
+            print('Parts: ' + str(len(parts)) + '\nDay: ' + str(len(day)))
+            self.date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1] + '(UTC)'
 
         self.text = self.createDisplayText()
 
