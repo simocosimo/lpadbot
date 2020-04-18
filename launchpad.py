@@ -27,6 +27,7 @@ def launches(update, context):
             padlocation = str(api_json[i]['pad']['location']['country'])
         else:
             padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
+        print(padlocation)
 
         l = Launch(
             str(api_json[i]['name']),
