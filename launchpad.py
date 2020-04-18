@@ -19,6 +19,7 @@ class Launch():
         self.padloc = padloc
         self.description = description
         self.text = self.createDisplayText()
+        self.launch_date = "TBD"
 
         if launch_date is not "None":
             parts = launch_date.split('T')
