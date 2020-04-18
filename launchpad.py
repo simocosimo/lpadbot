@@ -58,7 +58,7 @@ def launches(update, context):
     
     endtext = ""
     for i in range(0, len(txts)):
-        endtext = endtext + txts[i] + '\n-----------\n'
+        endtext = endtext + txts[i] + '\n===========\n'
     
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=endtext, 
