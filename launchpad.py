@@ -14,6 +14,7 @@ def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Testttt")
 
 if __name__ == '__main__':
+    print("Launchpad Bot started!\n")
     # Start polling for commands
     updater.start_polling()
     updater.idle()
