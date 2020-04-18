@@ -26,7 +26,7 @@ def launches(update, context):
         if str(api_json[i]['pad']['location']['statename']) is "None":
             padlocation = str(api_json[i]['pad']['location']['country'])
         else:
-            str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
+            padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
 
         l = Launch(
             str(api_json[i]['name']),
@@ -47,7 +47,7 @@ def launches(update, context):
                             text=endtext, 
                             parse_mode=ParseMode.HTML)
 
-def next(update, context):
+def nextLaunch(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 1
     api_json = json.loads(j.text)['result']
@@ -57,7 +57,7 @@ def next(update, context):
         if str(api_json[i]['pad']['location']['statename']) is "None":
             padlocation = str(api_json[i]['pad']['location']['country'])
         else:
-            str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
+            padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
 
         l = Launch(
             str(api_json[i]['name']),
@@ -89,7 +89,7 @@ def main():
     nextFive_handler = CommandHandler('launches', launches)
     dispatcher.add_handler(nextFive_handler)
 
-    nextOne_handler = CommandHandler('next', launches)
+    nextOne_handler = CommandHandler('next', nextLaunch)
     dispatcher.add_handler(nextOne_handler)
 
     # Start polling for commands

@@ -14,7 +14,7 @@ class Launch():
             parts = launch_date.split('T')
             day = parts[0].split('-')
             print('Parts: ' + str(len(parts)) + '\nDay: ' + str(len(day)))
-            self.date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1] + '(UTC)'
+            self.date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:-1] + '(UTC)'
 
         self.text = self.createDisplayText()
 
