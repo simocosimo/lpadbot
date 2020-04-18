@@ -8,7 +8,7 @@ import json
 from creds import token as bot_token
 
 class Launch():
-    def __init__(self, mission_name, provider, vehicle, padname, padloc, description, launch_date) {
+    def __init__(self, mission_name, provider, vehicle, padname, padloc, description, launch_date):
         self.mission_name = mission_name
         self.provider = provider
         self.vehicle = vehicle
@@ -17,7 +17,6 @@ class Launch():
         self.description = description
         self.launch_date = launch_date
         self.text = createDisplayText()
-    }
 
     def createDisplayText():
         text = '**Mission:** ' + self.mission_name + '\n' \
