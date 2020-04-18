@@ -20,11 +20,11 @@ class Launch():
         self.text = self.createDisplayText()
 
     def createDisplayText(self):
-        text = '**Mission:** ' + self.mission_name + '\n' \
-                '**Provider:** ' + self.provider + '\n' \
-                '**Vehicle:** ' + self.vehicle + '\n' \
-                '**Launching from** ' + self.padname + '(' + self.padloc + ')\n' \
-                '**Date:** ' + self.launch_date + '\n\n' \
+        text = '<b>Mission:</b> ' + self.mission_name + '\n' \
+                '<b>Provider:</b> ' + self.provider + '\n' \
+                '<b>Vehicle:</b> ' + self.vehicle + '\n' \
+                '<b>Launching from</b> ' + self.padname + '(' + self.padloc + ')\n' \
+                '<b>Date:</b> ' + self.launch_date + '\n\n' \
                 '' + self.description
         return text
     
@@ -62,7 +62,7 @@ def launches(update, context):
     
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=endtext, 
-                            parse_mode=ParseMode.MARKDOWN_V2)
+                            parse_mode=ParseMode.HTML)
 
 def main():
     print("Launchpad Bot started!\n")
