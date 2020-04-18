@@ -9,6 +9,7 @@ class Launch():
         self.description = description
         
         self.date = "TBD"
+        print("Date parameter: " + launch_date + '\n')
         if launch_date is not "None":
             parts = launch_date.split('T')
             day = parts[0].split('-')
