@@ -9,6 +9,8 @@ import json
 from creds import token as bot_token
 
 class Launch():
+    gmpas_baseurl = "https://www.google.com/maps/search/?api=1&query="
+
     def __init__(self, mission_name, provider, vehicle, padname, padloc, description, launch_date):
         self.mission_name = mission_name
         self.provider = provider
@@ -16,15 +18,20 @@ class Launch():
         self.padname = padname
         self.padloc = padloc
         self.description = description
-        self.launch_date = launch_date
         self.text = self.createDisplayText()
 
+        if launch_date is not "None":
+            parts = launch_date.split('T')
+            day = parts[0].split('-')
+            self.launch_date = day[1] + '-' + day[2] + '-' + day[0] + ' ' + parts[1][0:-1] + '(UTC)'
+
     def createDisplayText(self):
+        gmaps_querykey = self.padname.replace(' ', '+')
         text = '<b>Mission:</b> ' + self.mission_name + '\n' \
                 '<b>Provider:</b> ' + self.provider + '\n' \
                 '<b>Vehicle:</b> ' + self.vehicle + '\n' \
-                '<b>Launching from</b> ' + self.padname + '(' + self.padloc + ')\n' \
-                '<b>Date:</b> ' + self.launch_date + '\n\n' \
+                '<b>Launching from</b> <a href="' + self.gmpas_baseurl + gmaps_querykey + '">' + self.padname + ' (' + self.padloc + ')</a>\n' \
+                '<b>Date:</b> <i>' + self.launch_date + '</i>\n\n' \
                 '' + self.description
         return text
     
@@ -33,24 +40,29 @@ class Launch():
 
 #Start command
 def start(update, context):
-    welcome_text = '**Welcome to the Launchpad Bot**'
+    welcome_text = '<b>Welcome to the Launchpad Bot</b>\n'
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=welcome_text, 
-                            parse_mode=ParseMode.MARKDOWN_V2)
+                            parse_mode=ParseMode.HTML)
 
 def launches(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 5
     api_json = json.loads(j.text)['result']
-    print(api_json)
+    padlocation = ""
     txts = []
     for i in range(0, n_results):
+        if str(api_json[i]['pad']['location']['statename']) is "None":
+            padlocation = str(api_json[i]['pad']['location']['country'])
+        else:
+            str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
+
         l = Launch(
             str(api_json[i]['name']),
             str(api_json[i]['provider']['name']),
             str(api_json[i]['vehicle']['name']),
             str(api_json[i]['pad']['location']['name']),
-            str(api_json[i]['pad']['location']['statename']) + str(api_json[i]['pad']['location']['country']),
+            padlocation,
             str(api_json[i]['launch_description']),
             str(api_json[i]['win_open'])
         )
@@ -62,6 +74,33 @@ def launches(update, context):
     
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=endtext, 
+                            parse_mode=ParseMode.HTML)
+
+def next(update, context):
+    j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
+    n_results = 1
+    api_json = json.loads(j.text)['result']
+    padlocation = ""
+    txts = []
+    for i in range(0, n_results):
+        if str(api_json[i]['pad']['location']['statename']) is "None":
+            padlocation = str(api_json[i]['pad']['location']['country'])
+        else:
+            str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country']),
+
+        l = Launch(
+            str(api_json[i]['name']),
+            str(api_json[i]['provider']['name']),
+            str(api_json[i]['vehicle']['name']),
+            str(api_json[i]['pad']['location']['name']),
+            padlocation,
+            str(api_json[i]['launch_description']),
+            str(api_json[i]['win_open'])
+        )
+        txts.append(l.getFormattedText())
+    
+    context.bot.send_message(chat_id=update.effective_chat.id, 
+                            text=txts[0], 
                             parse_mode=ParseMode.HTML)
 
 def main():
@@ -78,6 +117,9 @@ def main():
 
     nextFive_handler = CommandHandler('launches', launches)
     dispatcher.add_handler(nextFive_handler)
+
+    nextOne_handler = CommandHandler('next', launches)
+    dispatcher.add_handler(nextOne_handler)
 
     # Start polling for commands
     updater.start_polling()
