@@ -1,4 +1,4 @@
-#Launchpad Bot for Telegram
+# Launchpad Bot for Telegram
 
 [Try it!](http://t.me/lpadbot)
 
