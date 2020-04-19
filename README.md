@@ -1,10 +1,11 @@
-#Launchpad Bot for Telegram.
-http://t.me/lpadbot
+#Launchpad Bot for Telegram
 
-This bot will show you informations about the next space launches that are gonna happen in the near future.
-It will provide information such as Mission's name, vehicle, provider, locations of the launchpad and date and a little description.
+[Try it!](http://t.me/lpadbot)
 
-Bare in mind that dates are subject to change!
+This bot will show you informations about the next space launches that are gonna happen in the near future. 
+It will provide information such as mission's name, vehicle, provider, locations of the launchpad and date and a little description.
+
+**Bare in mind that dates are subject to change!**
 A little photo of the vehicle id sent.
 
 Trying to improve it a lot. 
