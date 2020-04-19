@@ -1,6 +1,6 @@
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler
-from telegram import ParseMode
+from telegram import ParseMode, ChatAction
 
 import logging
 import requests
@@ -9,15 +9,31 @@ import json
 from creds import token as bot_token
 from launch import Launch
 
+from functools import wraps
+
+def send_typing_action(func):
+    """Sends typing action while processing func command."""
+
+    @wraps(func)
+    def command_func(update, context, *args, **kwargs):
+        context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
+        return func(update, context,  *args, **kwargs)
+
+    return command_func
+
 #Start command
+@send_typing_action
 def start(update, context):
+    pass
     welcome_text = '<b>Welcome to the Launchpad Bot</b>\n'
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=welcome_text, 
                             parse_mode=ParseMode.HTML)
     helpCommand(update, context)
 
+@send_typing_action
 def launches(update, context):
+    pass
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 5
     api_json = json.loads(j.text)['result']
