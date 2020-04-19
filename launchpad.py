@@ -15,6 +15,7 @@ def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, 
                             text=welcome_text, 
                             parse_mode=ParseMode.HTML)
+    helpCommand(update, context)
 
 def launches(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
