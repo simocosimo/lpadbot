@@ -84,10 +84,10 @@ def nextLaunch(update, context):
                             parse_mode=ParseMode.HTML)
 
 def info(update, context):
-    text = "<b>Launchpad Bot</b> for Telegram by @simocosimo\n" \
+    text = "<b>Launchpad Bot</b> for Telegram by @simocosimo\n\n" \
             "I really hope you like the bot. It is a work in progress, I want to improve" \
             " it as much as possible, in style and in informations. Bare in mind that " \
-            " space launches are usually subjected to change in schedule, so take the dates" \
+            " space launches are usually subject to change in schedule, so take the dates" \
             " with a grain of salt. \nIf you want to make a little donation to help the " \
             "project, <a href='https://www.paypal.me/simocosimo'>you can do it!</a> You absolutely don't have to, but they are really " \
             "appreciated!"
