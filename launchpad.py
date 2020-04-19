@@ -65,7 +65,9 @@ def launches(update, context):
                             disable_web_page_preview=True,
                             parse_mode=ParseMode.HTML)
 
+@send_typing_action
 def nextLaunch(update, context):
+    pass
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     n_results = 1
     api_json = json.loads(j.text)['result']
@@ -100,7 +102,9 @@ def nextLaunch(update, context):
                             caption=txts[0], 
                             parse_mode=ParseMode.HTML)
 
+@send_typing_action
 def info(update, context):
+    pass
     text = "<b>Launchpad Bot</b> for Telegram by @simocosimo\n\n" \
             "I really hope you like the bot. It is a work in progress, I want to improve" \
             " it as much as possible, in style and in informations. Bare in mind that " \
@@ -112,7 +116,9 @@ def info(update, context):
                             text=text, 
                             parse_mode=ParseMode.HTML)
 
+@send_typing_action
 def helpCommand(update, context):
+    pass
     helptext = "<b>/start</b> - Welcomes you\n" \
                 "<b>/launches</b> - Shows the upcoming 5 launches\n" \
                 "<b>/next</b> - Shows the next upcming launch\n" \
