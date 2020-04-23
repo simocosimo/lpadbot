@@ -93,9 +93,9 @@ def nextLaunch(update, context):
     providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china"]
     selected = ""
     for i in range(0, len(providers_list)):
-        print("Lower data: " + str(api_json[i]['provider']['name']).lower())
+        print("Lower data: " + str(api_json[0]['provider']['name']).lower())
         print("Item in list: " + providers_list[i])
-        if providers_list[i] in str(api_json[i]['provider']['name']).lower():
+        if providers_list[i] in str(api_json[0]['provider']['name']).lower():
             selected = providers_list[i] + '.jpg'
             break
 
