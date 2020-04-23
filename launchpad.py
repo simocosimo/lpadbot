@@ -92,9 +92,9 @@ def nextLaunch(update, context):
     
     providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china"]
     selected = ""
-    for i in range(0, len(providers_list)):
-        if providers_list[i] in str(api_json[i]['provider']['name']).lower():
-            selected = providers_list[i] + '.jpg'
+    for i in providers_list:
+        if i in str(api_json[i]['provider']['name']).lower():
+            selected = i + '.jpg'
             break
 
     context.bot.send_photo(chat_id=update.effective_chat.id, 
