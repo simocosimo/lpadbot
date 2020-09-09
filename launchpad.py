@@ -156,7 +156,7 @@ def nextLaunch(update, context):
         txts.append(rocket + ' #' + str(i+1) + ' - <i>' + str(api_json[i]['name']) + '</i> ' + rocket \
                     + '\n' + l.getFormattedText())
     
-    providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china", "astral", "virgin", "rocketlab"]
+    providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china", "astra", "virgin", "rocketlab"]
     selected = ""
     for i in range(0, len(providers_list)):
         print("Lower data: " + str(api_json[0]['provider']['name']).lower())
