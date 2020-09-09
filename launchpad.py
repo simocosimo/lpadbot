@@ -170,11 +170,16 @@ def nextLaunch(update, context):
     ]
     reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
-    context.bot.send_photo(chat_id=update.effective_chat.id, 
-                            photo=open('imgs/' + selected, 'rb'),
-                            caption=txts[0], 
-                            parse_mode=ParseMode.HTML,
-                            reply_markup=reply_markup)
+    if selected == "":
+        context.bot.send_message(chat_id=update.effective_chat.id, 
+                            text=txts[0], 
+                            parse_mode=ParseMode.HTML)
+    else:
+        context.bot.send_photo(chat_id=update.effective_chat.id, 
+                                photo=open('imgs/' + selected, 'rb'),
+                                caption=txts[0], 
+                                parse_mode=ParseMode.HTML,
+                                reply_markup=reply_markup)
 
 @send_typing_action
 def info(update, context):
