@@ -5,8 +5,9 @@ from telegram import ParseMode, ChatAction
 import logging
 import requests
 import json
+import os
 
-from creds import token as bot_token
+#from creds import token as bot_token
 from launch import Launch
 
 from functools import wraps
@@ -132,12 +133,16 @@ def helpCommand(update, context):
 
 def main():
     print("Launchpad Bot started!\n")
-    updater = Updater(token=bot_token, use_context=True)
+    PORT = os.environ.get('PORT')
+    TOKEN = os.environ["TOKEN"]
+    NAME = "launchpad-telegram-bot"
+    updater = Updater(token=TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
     # Setup the logging part of the bot
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                         level=logging.INFO)
+    #logger = logging.getLogger(__name__)
 
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
@@ -157,8 +162,11 @@ def main():
     help_handler = CommandHandler('help', helpCommand)
     dispatcher.add_handler(help_handler)
 
-    # Start polling for commands
-    updater.start_polling()
+    # Start the webhook
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
+    updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
     updater.idle()
 
 if __name__ == '__main__':
