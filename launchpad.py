@@ -104,82 +104,97 @@ def build_menu(buttons,
 @send_typing_action
 def nextLaunch(update, context):
     pass
-    j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
-    n_results = 1
-    api_json = json.loads(j.text)['result']
-    txts = []
-    livestream = ""
-    for i in range(0, n_results):
-        padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country'])
-        print(str(api_json[i]['pad']['location']['statename']))
-        if str(api_json[i]['pad']['location']['statename']) == "None":
-            padlocation = str(api_json[i]['pad']['location']['country'])
-        print(padlocation)
-
-        launch_date = str(api_json[i]['win_open'])
-        if launch_date == "None":
-            if str(api_json[i]['est_date']['month']) != "None":
-                day = '0'
-                month = '0'
-                if int(api_json[i]['est_date']['month']) < 10:
-                    month = month + str(api_json[i]['est_date']['month'])
-                else:
-                    month = str(api_json[i]['est_date']['month'])
-
-                if str(api_json[i]['est_date']['day']) != "None":
-                    if int(api_json[i]['est_date']['day']) < 10:
-                        day = day + str(api_json[i]['est_date']['day'])
-                    else:
-                        day = str(api_json[i]['est_date']['day'])
-                else:
-                    day = "??"
-
-                launch_date = month + '-' + day + '-' + str(api_json[i]['est_date']['year'])
-
-        if str(api_json[i]['quicktext']) != "None":
-            parts = str(api_json[i]['quicktext']).split('- ')
-            for x in parts:
-                if "https" in x:
-                    livestream = x
-
-        print("Livestream link: " + livestream)
-        l = Launch(
-            str(api_json[i]['name']),
-            str(api_json[i]['provider']['name']),
-            str(api_json[i]['vehicle']['name']),
-            str(api_json[i]['pad']['location']['name']),
-            padlocation,
-            str(api_json[i]['launch_description']),
-            launch_date,
-            livestream
-        )
-        txts.append(rocket + ' #' + str(i+1) + ' - <i>' + str(api_json[i]['name']) + '</i> ' + rocket \
-                    + '\n' + l.getFormattedText())
-    
     providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china", "astra", "virgin", "rocketlab"]
     selected = ""
-    for i in range(0, len(providers_list)):
-        print("Lower data: " + str(api_json[0]['provider']['name']).lower())
-        print("Item in list: " + providers_list[i])
-        if providers_list[i] in str(api_json[0]['provider']['name']).lower():
-            selected = providers_list[i] + '.jpg'
-            break
+    j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
+    #change this to select the right launch
+    n_results = 1
+    if context.args[0] != None: n_results = int(context.args[0])
 
-    button_list = [
-        InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
-    ]
-    reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+    if n_results > 0 and n_results < 6:
+        api_json = json.loads(j.text)['result']
+        txts = []
+        livestream = ""
+        for i in range(n_results - 1, n_results):
+            padlocation = str(api_json[i]['pad']['location']['statename']) + ', ' + str(api_json[i]['pad']['location']['country'])
+            print(str(api_json[i]['pad']['location']['statename']))
+            if str(api_json[i]['pad']['location']['statename']) == "None":
+                padlocation = str(api_json[i]['pad']['location']['country'])
+            print(padlocation)
 
-    if selected == "":
-        context.bot.send_message(chat_id=update.effective_chat.id, 
-                            text=txts[0], 
-                            parse_mode=ParseMode.HTML)
+            launch_date = str(api_json[i]['win_open'])
+            if launch_date == "None":
+                if str(api_json[i]['est_date']['month']) != "None":
+                    day = '0'
+                    month = '0'
+                    if int(api_json[i]['est_date']['month']) < 10:
+                        month = month + str(api_json[i]['est_date']['month'])
+                    else:
+                        month = str(api_json[i]['est_date']['month'])
+
+                    if str(api_json[i]['est_date']['day']) != "None":
+                        if int(api_json[i]['est_date']['day']) < 10:
+                            day = day + str(api_json[i]['est_date']['day'])
+                        else:
+                            day = str(api_json[i]['est_date']['day'])
+                    else:
+                        day = "??"
+
+                    launch_date = month + '-' + day + '-' + str(api_json[i]['est_date']['year'])
+
+            if str(api_json[i]['quicktext']) != "None":
+                parts = str(api_json[i]['quicktext']).split('- ')
+                for x in parts:
+                    if "https" in x:
+                        livestream = x
+
+            print("Livestream link: " + livestream)
+            l = Launch(
+                str(api_json[i]['name']),
+                str(api_json[i]['provider']['name']),
+                str(api_json[i]['vehicle']['name']),
+                str(api_json[i]['pad']['location']['name']),
+                padlocation,
+                str(api_json[i]['launch_description']),
+                launch_date,
+                livestream
+            )
+            txts.append(rocket + ' #' + str(i+1) + ' - <i>' + str(api_json[i]['name']) + '</i> ' + rocket \
+                        + '\n' + l.getFormattedText())
+
+            for k in range(0, len(providers_list)):
+                print("Lower data: " + str(api_json[i]['provider']['name']).lower())
+                print("Item in list: " + providers_list[k])
+                if providers_list[k] in str(api_json[i]['provider']['name']).lower():
+                    selected = providers_list[k] + '.jpg'
+                    break
+        
+        #providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china", "astra", "virgin", "rocketlab"]
+        #selected = ""
+        #for i in range(0, len(providers_list)):
+        #    print("Lower data: " + str(api_json[0]['provider']['name']).lower())
+        #    print("Item in list: " + providers_list[i])
+        #    if providers_list[i] in str(api_json[0]['provider']['name']).lower():
+        #        selected = providers_list[i] + '.jpg'
+        #        break
+
+        button_list = [
+            InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
+        ]
+        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+
+        if selected == "":
+            context.bot.send_message(chat_id=update.effective_chat.id, 
+                                text=txts[0], 
+                                parse_mode=ParseMode.HTML)
+        else:
+            context.bot.send_photo(chat_id=update.effective_chat.id, 
+                                    photo=open('imgs/' + selected, 'rb'),
+                                    caption=txts[0], 
+                                    parse_mode=ParseMode.HTML,
+                                    reply_markup=reply_markup)
     else:
-        context.bot.send_photo(chat_id=update.effective_chat.id, 
-                                photo=open('imgs/' + selected, 'rb'),
-                                caption=txts[0], 
-                                parse_mode=ParseMode.HTML,
-                                reply_markup=reply_markup)
+        print("param not in range\n")
 
 @send_typing_action
 def info(update, context):
@@ -231,6 +246,9 @@ def main():
 
     nextPic_handler = CommandHandler('next', nextLaunch)
     dispatcher.add_handler(nextPic_handler)
+
+    selectedPic_handler = CommandHandler('', nextLaunch)
+    dispatcher.add_handler(selectedPic_handler)
 
     info_handler = CommandHandler('info', info)
     dispatcher.add_handler(info_handler)
