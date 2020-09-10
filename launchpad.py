@@ -247,9 +247,6 @@ def main():
     nextPic_handler = CommandHandler('next', nextLaunch)
     dispatcher.add_handler(nextPic_handler)
 
-    selectedPic_handler = CommandHandler('', nextLaunch)
-    dispatcher.add_handler(selectedPic_handler)
-
     info_handler = CommandHandler('info', info)
     dispatcher.add_handler(info_handler)
 
