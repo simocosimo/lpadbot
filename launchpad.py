@@ -193,7 +193,7 @@ def firstLaunch(update, context):
     button_list = [
             InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
         ]
-        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+    reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
     if selected == "":
             context.bot.send_message(chat_id=update.effective_chat.id, 
@@ -214,7 +214,7 @@ def secondLaunch(update, context):
     button_list = [
             InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
         ]
-        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+    reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
     if selected == "":
             context.bot.send_message(chat_id=update.effective_chat.id, 
@@ -235,7 +235,7 @@ def thirdLaunch(update, context):
     button_list = [
             InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
         ]
-        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+    reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
     if selected == "":
             context.bot.send_message(chat_id=update.effective_chat.id, 
@@ -256,7 +256,7 @@ def forthLaunch(update, context):
     button_list = [
             InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
         ]
-        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+    reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
     if selected == "":
             context.bot.send_message(chat_id=update.effective_chat.id, 
@@ -277,7 +277,7 @@ def fifthLaunch(update, context):
     button_list = [
             InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
         ]
-        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+    reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
     if selected == "":
             context.bot.send_message(chat_id=update.effective_chat.id, 
