@@ -78,7 +78,7 @@ def launches(update, context):
             launch_date,
             livestream
         )
-        txts.append(rocket + ' #' + str(i+1) + ' - <i>' + str(api_json[i]['name']) + '</i> ' + rocket \
+        txts.append(rocket + ' /' + str(i+1) + ' - <i>' + str(api_json[i]['name']) + '</i> ' + rocket \
                     + '\n' + l.getFormattedText())
     
     endtext = ""
