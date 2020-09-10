@@ -109,8 +109,9 @@ def nextLaunch(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     #change this to select the right launch
     n_results = 1
-    print("arg[0]: " + str(context.args[0]))
-    if context.args[0] != None: n_results = int(context.args[0])
+    if len(context.args) != 0: 
+        print("arg[0]: " + str(context.args[0]))
+        n_results = int(context.args[0])
 
     if n_results > 0 and n_results < 6:
         api_json = json.loads(j.text)['result']
@@ -195,7 +196,7 @@ def nextLaunch(update, context):
                                     parse_mode=ParseMode.HTML,
                                     reply_markup=reply_markup)
     else:
-        print("param not in range\nn_results: " + str(n_results) + "\nArgument: " + context.args[0] + "\n")
+        print("param not in range\nn_results: " + str(n_results) + "\n")
 
 @send_typing_action
 def info(update, context):
