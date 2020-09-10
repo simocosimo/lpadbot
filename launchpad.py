@@ -101,17 +101,12 @@ def build_menu(buttons,
         menu.append([footer_buttons])
     return menu
 
-@send_typing_action
-def nextLaunch(update, context):
+def nextLaunch(n_results):
     pass
-    providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china", "astra", "virgin", "rocketlab"]
+    providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china", "astra", "virgin", "rocketlab", "grumman"]
     selected = ""
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     #change this to select the right launch
-    n_results = 1
-    if len(context.args) != 0: 
-        print("arg[0]: " + str(context.args[0]))
-        n_results = int(context.args[0])
 
     if n_results > 0 and n_results < 6:
         api_json = json.loads(j.text)['result']
@@ -170,33 +165,130 @@ def nextLaunch(update, context):
                 if providers_list[k] in str(api_json[i]['provider']['name']).lower():
                     selected = providers_list[k] + '.jpg'
                     break
-        
-        #providers_list = ["spacex", "ula", "nasa", "roscosmos", "jaxa", "china", "astra", "virgin", "rocketlab"]
-        #selected = ""
-        #for i in range(0, len(providers_list)):
-        #    print("Lower data: " + str(api_json[0]['provider']['name']).lower())
-        #    print("Item in list: " + providers_list[i])
-        #    if providers_list[i] in str(api_json[0]['provider']['name']).lower():
-        #        selected = providers_list[i] + '.jpg'
-        #        break
 
-        button_list = [
+        return txts[0], selected, livestream
+        #button_list = [
+        #    InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
+        #]
+        #reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+
+        #if selected == "":
+        #    context.bot.send_message(chat_id=update.effective_chat.id, 
+        #                        text=txts[0], 
+        #                        parse_mode=ParseMode.HTML)
+        #else:
+        #    context.bot.send_photo(chat_id=update.effective_chat.id, 
+        #                            photo=open('imgs/' + selected, 'rb'),
+        #                            caption=txts[0], 
+        #                            parse_mode=ParseMode.HTML,
+        #                            reply_markup=reply_markup)
+    else:
+        print("param not in range\nn_results: " + str(n_results) + "\n")
+
+@send_typing_action
+def firstLaunch(update, context):
+
+    text, imageName, livestream = nextLaunch(1)
+
+    button_list = [
             InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
         ]
         reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
-        if selected == "":
+    if selected == "":
             context.bot.send_message(chat_id=update.effective_chat.id, 
-                                text=txts[0], 
+                                text=text, 
                                 parse_mode=ParseMode.HTML)
         else:
             context.bot.send_photo(chat_id=update.effective_chat.id, 
-                                    photo=open('imgs/' + selected, 'rb'),
-                                    caption=txts[0], 
+                                    photo=open('imgs/' + imageName, 'rb'),
+                                    caption=text, 
                                     parse_mode=ParseMode.HTML,
                                     reply_markup=reply_markup)
-    else:
-        print("param not in range\nn_results: " + str(n_results) + "\n")
+
+@send_typing_action
+def secondLaunch(update, context):
+
+    text, imageName, livestream = nextLaunch(2)
+
+    button_list = [
+            InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
+        ]
+        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+
+    if selected == "":
+            context.bot.send_message(chat_id=update.effective_chat.id, 
+                                text=text, 
+                                parse_mode=ParseMode.HTML)
+        else:
+            context.bot.send_photo(chat_id=update.effective_chat.id, 
+                                    photo=open('imgs/' + imageName, 'rb'),
+                                    caption=text, 
+                                    parse_mode=ParseMode.HTML,
+                                    reply_markup=reply_markup)
+
+@send_typing_action
+def thirdLaunch(update, context):
+
+    text, imageName, livestream = nextLaunch(3)
+
+    button_list = [
+            InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
+        ]
+        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+
+    if selected == "":
+            context.bot.send_message(chat_id=update.effective_chat.id, 
+                                text=text, 
+                                parse_mode=ParseMode.HTML)
+        else:
+            context.bot.send_photo(chat_id=update.effective_chat.id, 
+                                    photo=open('imgs/' + imageName, 'rb'),
+                                    caption=text, 
+                                    parse_mode=ParseMode.HTML,
+                                    reply_markup=reply_markup)
+
+@send_typing_action
+def forthLaunch(update, context):
+
+    text, imageName, livestream = nextLaunch(4)
+
+    button_list = [
+            InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
+        ]
+        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+
+    if selected == "":
+            context.bot.send_message(chat_id=update.effective_chat.id, 
+                                text=text, 
+                                parse_mode=ParseMode.HTML)
+        else:
+            context.bot.send_photo(chat_id=update.effective_chat.id, 
+                                    photo=open('imgs/' + imageName, 'rb'),
+                                    caption=text, 
+                                    parse_mode=ParseMode.HTML,
+                                    reply_markup=reply_markup)
+
+@send_typing_action
+def fifthLaunch(update, context):
+
+    text, imageName, livestream = nextLaunch(5)
+
+    button_list = [
+            InlineKeyboardButton("Watch Livestream (if available)", url=livestream)
+        ]
+        reply_markup = InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+
+    if selected == "":
+            context.bot.send_message(chat_id=update.effective_chat.id, 
+                                text=text, 
+                                parse_mode=ParseMode.HTML)
+        else:
+            context.bot.send_photo(chat_id=update.effective_chat.id, 
+                                    photo=open('imgs/' + imageName, 'rb'),
+                                    caption=text, 
+                                    parse_mode=ParseMode.HTML,
+                                    reply_markup=reply_markup)
 
 @send_typing_action
 def info(update, context):
@@ -243,11 +335,23 @@ def main():
     nextFive_handler = CommandHandler('launches', launches)
     dispatcher.add_handler(nextFive_handler)
 
-    #nextOne_handler = CommandHandler('next', nextLaunch)
-    #dispatcher.add_handler(nextOne_handler)
-
-    nextPic_handler = CommandHandler('next', nextLaunch)
+    nextPic_handler = CommandHandler('next', firstLaunch)
     dispatcher.add_handler(nextPic_handler)
+
+    nextPic_handler = CommandHandler('1', firstLaunch)
+    dispatcher.add_handler(nextPic_handler)
+
+    secondPic_handler = CommandHandler('2', secondLaunch)
+    dispatcher.add_handler(secondPic_handler)
+
+    thirdPic_handler = CommandHandler('3', thirdLaunch)
+    dispatcher.add_handler(thirdPic_handler)
+
+    forthPic_handler = CommandHandler('4', forthLaunch)
+    dispatcher.add_handler(forthPic_handler)
+
+    fifthPic_handler = CommandHandler('5', fifthLaunch)
+    dispatcher.add_handler(fifthPic_handler)
 
     info_handler = CommandHandler('info', info)
     dispatcher.add_handler(info_handler)
