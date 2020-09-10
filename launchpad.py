@@ -195,7 +195,7 @@ def nextLaunch(update, context):
                                     parse_mode=ParseMode.HTML,
                                     reply_markup=reply_markup)
     else:
-        print("param not in range\nn_results: " + str(n_results) + "\nArgument: " + context.args[0] "\n")
+        print("param not in range\nn_results: " + str(n_results) + "\nArgument: " + context.args[0] + "\n")
 
 @send_typing_action
 def info(update, context):
