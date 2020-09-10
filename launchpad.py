@@ -109,7 +109,7 @@ def nextLaunch(update, context):
     j = requests.get('https://fdo.rocketlaunch.live/json/launches/next/5')
     #change this to select the right launch
     n_results = 1
-    print("arg[0]: " + context.args[0])
+    print("arg[0]: " + str(context.args[0]))
     if context.args[0] != None: n_results = int(context.args[0])
 
     if n_results > 0 and n_results < 6:
